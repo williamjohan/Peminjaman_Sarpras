@@ -8,4 +8,6 @@ public class Login {
         this.user = user;
         this.password = password;
     }
+
+
 }

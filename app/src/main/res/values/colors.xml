@@ -7,4 +7,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- color for button landing page-->
+    <color name="button_skip">#016EEA</color>
+    <color name="getstarted">#4c84ff</color>
+    <color name="gradient_start_color">#4c84ff</color>
+    <color name="gradient_end_color">#18A3FE</color>
+
+    <!-- color for text inside viewpager-->
+    <color name="title">#000000</color>
+    <color name="description">#484141</color>
+    <color name="skip">#013B84</color>
+
+    <!--color for tab layout indicotr-->
+    <color name="tab_indicator_default">#BDBDC5</color>
 </resources>
