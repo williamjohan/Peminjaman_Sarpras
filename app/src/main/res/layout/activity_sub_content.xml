@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SubContent">
+    android:orientation="vertical"
+    tools:context=".ContentSectionPage.SubContent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp">
+
+        <ImageView
+            android:id="@+id/backicon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/arrowleft_icon"/>
+
+        <TextView
+            android:id="@+id/judulbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Judul Bar"
+            android:layout_marginStart="6dp"
+            android:textColor="@color/gradient_start_color"
+            android:textSize="30dp" />
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RVsubcontent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        tools:layout_editor_absoluteX="1dp"
+        android:padding="10dp"
+        tools:layout_editor_absoluteY="1dp" />
+</LinearLayout>

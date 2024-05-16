@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.peminjaman_sarpras.R;
-import com.example.peminjaman_sarpras.constructor.ScreenItem;
+import com.example.peminjaman_sarpras.constructor.ScreenItemConstructor;
 
 import java.util.List;
 
 public class IntroViewPageAdapter extends PagerAdapter {
 
     Context mcontex;
-    List<ScreenItem> mListScreen ;
+    List<ScreenItemConstructor> mListScreen ;
 
-    public IntroViewPageAdapter(Context mcontex, List<ScreenItem> mListScreen) {
+    public IntroViewPageAdapter(Context mcontex, List<ScreenItemConstructor> mListScreen) {
         this.mcontex = mcontex;
         this.mListScreen = mListScreen;
     }
@@ -31,7 +31,7 @@ public class IntroViewPageAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
         LayoutInflater inflater = (LayoutInflater) mcontex.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layoutScreen = inflater.inflate(R.layout.layout_screen, null);
+        View layoutScreen = inflater.inflate(R.layout.layout_intro_screen, null);
 
         //membuat inflater layout membaca item item nya
         ImageView imgSlide = layoutScreen.findViewById(R.id.image_intro);

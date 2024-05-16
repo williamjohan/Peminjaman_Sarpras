@@ -19,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.peminjaman_sarpras.adapter.IntroViewPageAdapter;
-import com.example.peminjaman_sarpras.constructor.ScreenItem;
+import com.example.peminjaman_sarpras.constructor.ScreenItemConstructor;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -68,14 +68,14 @@ public class IntroActivity extends AppCompatActivity {
         });
 
         //buat list screennya
-        List<ScreenItem> mList = new ArrayList<>();
-        mList.add(new ScreenItem("Meeting Room", "In a laoreet purus. Integer turpis quam, laoreet id orci nec, ultrices lacinia nunc. Aliquam erat vo", R.drawable.rapat));
-        mList.add(new ScreenItem("Coworking-Space", "In a laoreet purus. Integer turpis quam, laoreet id orci nec, ultrices lacinia nunc. Aliquam erat vo", R.drawable.coworkingspace));
-        mList.add(new ScreenItem("Aula Hallroom", "In a laoreet purus. Integer turpis quam, laoreet id orci nec, ultrices lacinia nunc. Aliquam erat vo", R.drawable.eventbesar));
+        List<ScreenItemConstructor> mList = new ArrayList<>();
+        mList.add(new ScreenItemConstructor("Meeting Room", "In a laoreet purus. Integer turpis quam, laoreet id orci nec, ultrices lacinia nunc. Aliquam erat vo", R.drawable.rapat_introscreen));
+        mList.add(new ScreenItemConstructor("Coworking-Space", "In a laoreet purus. Integer turpis quam, laoreet id orci nec, ultrices lacinia nunc. Aliquam erat vo", R.drawable.coworkingspace_introscreen));
+        mList.add(new ScreenItemConstructor("Aula Hallroom", "In a laoreet purus. Integer turpis quam, laoreet id orci nec, ultrices lacinia nunc. Aliquam erat vo", R.drawable.aula_introscreen));
 
 /** Ngecek masuk ke listnya
- //        for (ScreenItem item : mList) {
- //            Log.d("ScreenItem", "Title: " + item.getTitle() + ", Description: " + item.getDescription() + ", Image: " + item.getScreenImg());
+ //        for (ScreenItemConstructor item : mList) {
+ //            Log.d("ScreenItemConstructor", "Title: " + item.getTitle() + ", Description: " + item.getDescription() + ", Image: " + item.getScreenImg());
  //        }
  */
 
@@ -96,7 +96,7 @@ public class IntroActivity extends AppCompatActivity {
                 if (position < mList.size()) {
                     position++;
                     screenpager.setCurrentItem(position);
-                    Log.d("ScreenItem", "Title: " + mList.get(position).getTitle() + ", Description: " + mList.get(position).getDescription() + ", Image: " + mList.get(position).getScreenImg());
+                    Log.d("ScreenItemConstructor", "Title: " + mList.get(position).getTitle() + ", Description: " + mList.get(position).getDescription() + ", Image: " + mList.get(position).getScreenImg());
                 }
                 if (position == mList.size() - 1) { // ketika sampai di page terakhir atau screen terakhir.
                     //TODO : show Getstarted button and hide next button dan indicator tablayout.

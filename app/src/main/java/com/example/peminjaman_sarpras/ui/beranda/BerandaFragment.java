@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.peminjaman_sarpras.DBHelper;
 import com.example.peminjaman_sarpras.R;
 import com.example.peminjaman_sarpras.adapter.ContentAdapter;
-import com.example.peminjaman_sarpras.constructor.Content;
+import com.example.peminjaman_sarpras.constructor.ContentConstructor;
+import com.example.peminjaman_sarpras.database.DBHelper;
 
 import java.util.List;
 
@@ -23,6 +23,7 @@ public class BerandaFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ContentAdapter contendapter;
+    private int jumlahruangan;
 
     @Nullable
     @Override
@@ -36,7 +37,9 @@ public class BerandaFragment extends Fragment {
         //inisiasi class dbhelper
         DBHelper db = new DBHelper(getContext());
         //memanggil isi data di dbhelper ditampung di listcontent
-        List<Content> listcontent = db.getallcontents();
+        List<ContentConstructor> listcontent = db.getallcontents();
+
+
 
         //memasukkan isi listcontent ke adapter
         contendapter = new ContentAdapter(listcontent,getContext());

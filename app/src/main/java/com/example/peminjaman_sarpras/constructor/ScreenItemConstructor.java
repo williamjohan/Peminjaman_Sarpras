@@ -1,11 +1,11 @@
 package com.example.peminjaman_sarpras.constructor;
 
-public class ScreenItem {
+public class ScreenItemConstructor {
 
     String title , description;
     int ScreenImg;
 
-    public ScreenItem(String title, String description, int screenImg) {
+    public ScreenItemConstructor(String title, String description, int screenImg) {
         this.title = title;
         this.description = description;
         ScreenImg = screenImg;

@@ -56,7 +56,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/baseline_notifications_24" />
+                app:srcCompat="@drawable/notification_icon" />
 
             <ImageView
                 android:id="@+id/red_circle_notif"

@@ -1,14 +1,17 @@
 package com.example.peminjaman_sarpras.constructor;
 
-public class Content {
+public class ContentConstructor {
     private String namacontent;
-    private String jumlahvenue;
     private String imageresname;
+    private int id;
+    private int jumlahruangan;
 
-    public Content(String namacontent, String jumlahvenue, String imageresname) {
+
+    public ContentConstructor(int id, String namacontent, String imageresname , int jumlahruangan) {
         this.namacontent = namacontent;
-        this.jumlahvenue = jumlahvenue;
         this.imageresname = imageresname;
+        this.id = id;
+        this.jumlahruangan = jumlahruangan;
     }
 
     public String getNamacontent() {
@@ -19,19 +22,27 @@ public class Content {
         this.namacontent = namacontent;
     }
 
-    public String getJumlahvenue() {
-        return jumlahvenue;
-    }
-
-    public void setJumlahvenue(String jumlahvenue) {
-        this.jumlahvenue = jumlahvenue;
-    }
-
     public String getImageresname() {
         return imageresname;
     }
 
     public void setImageresname(String imageresname) {
         this.imageresname = imageresname;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getJumlahruangan() {
+        return jumlahruangan;
+    }
+
+    public void setJumlahruangan(int jumlahruangan) {
+        this.jumlahruangan = jumlahruangan;
     }
 }
