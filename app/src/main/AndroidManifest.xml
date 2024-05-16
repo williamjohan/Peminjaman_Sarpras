@@ -10,8 +10,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Peminjaman_Sarpras"
+        android:theme="@style/Theme.AppTheme"
         tools:targetApi="31">
+        <activity
+            android:name=".SubDetailContent"
+            android:exported="false" />
+        <activity
+            android:name=".SubContent"
+            android:exported="false" />
         <activity
             android:name=".SplashScreen"
             android:exported="true">
@@ -21,13 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".IntroActivity"
             android:exported="true"
-            android:label="@string/app_name">
-        </activity>
-
+            android:label="@string/app_name" />
         <activity
             android:name=".Login_Page"
             android:exported="false" />

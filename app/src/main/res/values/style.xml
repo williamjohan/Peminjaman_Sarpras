@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.App" parent="Theme.Material3.DayNight">
+        ...
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <!-- Text -->
+        <item name="colorOnSurface">@color/gradient_end_color</item>
+<!--        <item name="colorPrimary">@color/white</item>-->
+        <!-- icon -->
+        <item name="colorOnSecondaryContainer">@color/getstarted</item>
+        <item name="colorOnSurfaceVariant">#8D8A8F</item>
+    </style>
+</resources>

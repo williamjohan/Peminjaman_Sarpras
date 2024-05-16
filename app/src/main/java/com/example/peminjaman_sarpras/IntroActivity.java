@@ -2,7 +2,6 @@ package com.example.peminjaman_sarpras;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +18,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.peminjaman_sarpras.adapter.IntroViewPageAdapter;
+import com.example.peminjaman_sarpras.constructor.ScreenItem;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class IntroActivity extends AppCompatActivity {
     Button btnGetStarted;
     int position = 0;
     Animation btnAnim;
-    Animation btnAnimReverse;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +159,7 @@ public class IntroActivity extends AppCompatActivity {
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("myprefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("isFirstTime", true);
-        editor.commit();
+        editor.apply();
     }
 
 

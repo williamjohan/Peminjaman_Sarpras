@@ -21,4 +21,6 @@
 
     <!--color for tab layout indicotr-->
     <color name="tab_indicator_default">#BDBDC5</color>
+
+    <color name="transparent">#00000000</color>
 </resources>
