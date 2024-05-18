@@ -13,6 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.peminjaman_sarpras.allpages.IntroActivity;
+
 public class SplashScreen extends AppCompatActivity {
     ImageView logo;
     Animation animation;
@@ -41,6 +43,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(SplashScreen.this, IntroActivity.class);
                 startActivity(intent);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 finish();
             }
         },2000);

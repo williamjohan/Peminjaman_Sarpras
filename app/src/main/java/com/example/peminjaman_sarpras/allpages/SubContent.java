@@ -1,6 +1,5 @@
-package com.example.peminjaman_sarpras.ContentSectionPage;
+package com.example.peminjaman_sarpras.allpages;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.peminjaman_sarpras.MainActivity;
 import com.example.peminjaman_sarpras.R;
 import com.example.peminjaman_sarpras.adapter.SubContentAdapter;
 import com.example.peminjaman_sarpras.constructor.SubContentConstructor;
@@ -40,16 +38,18 @@ public class SubContent extends AppCompatActivity {
         //init var
         judulbar = findViewById(R.id.judulbar);
         imgback = findViewById(R.id.backicon);
-
         recyclerView = findViewById(R.id.RVsubcontent);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-        //memasukkan data yang diterima dari intent ContentAdapter
         Bundle extras = getIntent().getExtras();
 
         judulbar.setText(extras.getString("namacontent"));
+
         int idcontent = extras.getInt("idlistcontent");
+
+        // ngecek aja di log
+//        Log.d("SubContent", "namacontent: " + tampungnamacontent);
+//        Log.d("SubContent", "idlistcontent: " + idcontent);
 
 
         //inisiasi class dbhelper
@@ -57,15 +57,16 @@ public class SubContent extends AppCompatActivity {
         //memanggil isi data di dbhelper ditampung di listcontent
         List<SubContentConstructor> listsubcontent = db.getallruangan(idcontent);
 
-
         //memasukkan isi listcontent ke adapter
         subcontentadapter = new SubContentAdapter(listsubcontent,this);
         recyclerView.setAdapter(subcontentadapter);
 
+
         imgback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                finish();
             }
         });
 

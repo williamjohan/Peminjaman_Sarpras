@@ -13,12 +13,14 @@
         android:theme="@style/Theme.AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".ContentSectionPage.SubContent"
+            android:name=".allpages.SubDetailContent"
+            android:exported="false" />
+        <activity
+            android:name=".allpages.SubContent"
             android:exported="false" />
         <activity
             android:name=".SubDetailContent"
             android:exported="false" />
-
         <activity
             android:name=".SplashScreen"
             android:exported="true">
@@ -29,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".IntroActivity"
+            android:name=".allpages.IntroActivity"
             android:exported="true"
             android:label="@string/app_name" />
         <activity

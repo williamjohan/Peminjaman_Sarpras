@@ -5,22 +5,21 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.peminjaman_sarpras.ContentSectionPage.SubContent;
 import com.example.peminjaman_sarpras.R;
+import com.example.peminjaman_sarpras.allpages.SubContent;
 import com.example.peminjaman_sarpras.constructor.ContentConstructor;
-import com.example.peminjaman_sarpras.constructor.SubContentConstructor;
 
 import java.util.List;
 
 public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHolder> {
 
     private List<ContentConstructor> listcontent;
-    private List<SubContentConstructor> sublistcontent;
 
 
 
@@ -54,27 +53,26 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHold
 
         //mentransfer gambar ke holder , tapi dibuat dulu penampung gambarnya
         int imagecontent = context.getResources().getIdentifier(classcontent.getImageresname(),"drawable",context.getPackageName());
-        holder.ImageView.setImageResource(imagecontent);
+        holder.viewimage.setImageResource(imagecontent);
 
 
         //TODO On click ketika item view diklik
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
+
                 int position = holder.getAdapterPosition();
-
-                ContentConstructor content = listcontent.get(position);
-
-
                 String namajudul = listcontent.get(position).getNamacontent();
+
                 int idlistcontent = listcontent.get(position).getId();
 
                 Intent intent = new Intent(context, SubContent.class);
+                intent.putExtra("navigateTo", "riwayat");
                 intent.putExtra("namacontent",namajudul);
                 intent.putExtra("idlistcontent",idlistcontent);
 
                 context.startActivity(intent);
+
             }
         });
     }
@@ -89,12 +87,12 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView titletextview , jumlahruangannya;
-        public android.widget.ImageView ImageView;
+        public ImageView viewimage;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             titletextview = itemView.findViewById(R.id.Tvjudulcontent);
             jumlahruangannya = itemView.findViewById(R.id.Tvquotaruangan);
-            ImageView = itemView.findViewById(R.id.imgcontent);
+            viewimage = itemView.findViewById(R.id.imgcontent);
         }
     }
 }

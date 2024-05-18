@@ -1,9 +1,8 @@
-package com.example.peminjaman_sarpras;
+package com.example.peminjaman_sarpras.allpages;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,6 +17,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.peminjaman_sarpras.MainActivity;
+import com.example.peminjaman_sarpras.R;
 import com.example.peminjaman_sarpras.adapter.IntroViewPageAdapter;
 import com.example.peminjaman_sarpras.constructor.ScreenItemConstructor;
 import com.google.android.material.tabs.TabLayout;
@@ -73,10 +74,10 @@ public class IntroActivity extends AppCompatActivity {
         mList.add(new ScreenItemConstructor("Coworking-Space", "In a laoreet purus. Integer turpis quam, laoreet id orci nec, ultrices lacinia nunc. Aliquam erat vo", R.drawable.coworkingspace_introscreen));
         mList.add(new ScreenItemConstructor("Aula Hallroom", "In a laoreet purus. Integer turpis quam, laoreet id orci nec, ultrices lacinia nunc. Aliquam erat vo", R.drawable.aula_introscreen));
 
-/** Ngecek masuk ke listnya
- //        for (ScreenItemConstructor item : mList) {
- //            Log.d("ScreenItemConstructor", "Title: " + item.getTitle() + ", Description: " + item.getDescription() + ", Image: " + item.getScreenImg());
- //        }
+/* Ngecek masuk ke listnya
+         for (ScreenItemConstructor item : mList) {
+             Log.d("ScreenItemConstructor", "Title: " + item.getTitle() + ", Description: " + item.getDescription() + ", Image: " + item.getScreenImg());
+         }
  */
 
 
@@ -96,7 +97,7 @@ public class IntroActivity extends AppCompatActivity {
                 if (position < mList.size()) {
                     position++;
                     screenpager.setCurrentItem(position);
-                    Log.d("ScreenItemConstructor", "Title: " + mList.get(position).getTitle() + ", Description: " + mList.get(position).getDescription() + ", Image: " + mList.get(position).getScreenImg());
+//                    Log.d("ScreenItemConstructor", "Title: " + mList.get(position).getTitle() + ", Description: " + mList.get(position).getDescription() + ", Image: " + mList.get(position).getScreenImg());
                 }
                 if (position == mList.size() - 1) { // ketika sampai di page terakhir atau screen terakhir.
                     //TODO : show Getstarted button and hide next button dan indicator tablayout.

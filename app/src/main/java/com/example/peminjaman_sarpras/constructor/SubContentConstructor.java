@@ -3,13 +3,15 @@ package com.example.peminjaman_sarpras.constructor;
 public class SubContentConstructor {
 
     private int idlist;
+    private int idruangan;
     private String namaruangan;
     private String gambar;
     private String lokasiruangan;
-    private String hargaruangan;
+    private int hargaruangan;
 
-    public SubContentConstructor(int idlist, String namaruangan, String gambar, String lokasiruangan, String hargaruangan) {
+    public SubContentConstructor(int idlist, int idruangan, String namaruangan, String gambar, String lokasiruangan, int hargaruangan) {
         this.idlist= idlist;
+        this.idruangan = idruangan;
         this.namaruangan = namaruangan;
         this.gambar = gambar;
         this.lokasiruangan = lokasiruangan;
@@ -39,11 +41,11 @@ public class SubContentConstructor {
         this.lokasiruangan = lokasiruangan;
     }
 
-    public String getHargaruangan() {
+    public int getHargaruangan() {
         return hargaruangan;
     }
 
-    public void setHargaruangan(String hargaruangan) {
+    public void setHargaruangan(int hargaruangan) {
         this.hargaruangan = hargaruangan;
     }
 
@@ -53,5 +55,13 @@ public class SubContentConstructor {
 
     public void setIdlist(int idlist) {
         this.idlist = idlist;
+    }
+
+    public int getIdruangan() {
+        return idruangan;
+    }
+
+    public void setIdruangan(int idruangan) {
+        this.idruangan = idruangan;
     }
 }
