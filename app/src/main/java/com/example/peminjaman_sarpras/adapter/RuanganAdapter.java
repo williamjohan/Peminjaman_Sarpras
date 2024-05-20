@@ -12,41 +12,41 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.peminjaman_sarpras.R;
-import com.example.peminjaman_sarpras.allpages.SubDetailContent;
-import com.example.peminjaman_sarpras.constructor.SubContentConstructor;
+import com.example.peminjaman_sarpras.pages.beranda.DetailRuanganPages;
+import com.example.peminjaman_sarpras.model.Ruangan_Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubContentAdapter extends RecyclerView.Adapter<SubContentAdapter.ViewHolder> {
+public class RuanganAdapter extends RecyclerView.Adapter<RuanganAdapter.ViewHolder> {
 
-    private List<SubContentConstructor> subcontentlist = new ArrayList<>();
+    private List<Ruangan_Model> ruanganlist = new ArrayList<>();
     private Context context;
 
-    public SubContentAdapter(List<SubContentConstructor> subcontentlist, Context context) {
-        this.subcontentlist = subcontentlist;
+    public RuanganAdapter(List<Ruangan_Model> ruanganlist, Context context) {
+        this.ruanganlist = ruanganlist;
         this.context = context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_sub_list_content, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_listruangan, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //transfer nilai dari subcontent
-        SubContentConstructor subcontent = subcontentlist.get(position);
+        Ruangan_Model ruangan = ruanganlist.get(position);
 
         //transfer nilai dari subcontent
-        holder.namaruangan.setText(subcontent.getNamaruangan());
-        holder.hargaruangan.setText("Rp." + subcontent.getHargaruangan() + " /Jam");
-        holder.lokasiruangan.setText(subcontent.getLokasiruangan());
+        holder.namaruangan.setText(ruangan.getNamaruangan());
+        holder.hargaruangan.setText("Rp." + ruangan.getHargaruangan() + " /Jam");
+        holder.lokasiruangan.setText(ruangan.getLokasiruangan());
 
         //transfer gambar ke holder
-        int imageResource = context.getResources().getIdentifier(subcontent.getGambar(), "drawable", context.getPackageName());
+        int imageResource = context.getResources().getIdentifier(ruangan.getGambar(), "drawable", context.getPackageName());
         holder.gambarruangan.setImageResource(imageResource);
 
 
@@ -55,12 +55,12 @@ public class SubContentAdapter extends RecyclerView.Adapter<SubContentAdapter.Vi
             @Override
             public void onClick(View view) {
                 int position = holder.getAdapterPosition();
-                int idruangan = subcontentlist.get(position).getIdruangan();
-                String namaRuangan = subcontentlist.get(position).getNamaruangan();
-                int hargaRuangan = subcontentlist.get(position).getHargaruangan();
+                int idruangan = ruanganlist.get(position).getIdruangan();
+                String namaRuangan = ruanganlist.get(position).getNamaruangan();
+                int hargaRuangan = ruanganlist.get(position).getHargaruangan();
 
 
-                Intent intent = new Intent(context, SubDetailContent.class);
+                Intent intent = new Intent(context, DetailRuanganPages.class);
                 // Buka SubDetailContentActivity dan kirim data ke activity tersebut
                 intent.putExtra("nama_ruangan", namaRuangan);
                 intent.putExtra("id_ruangan", idruangan);
@@ -74,7 +74,7 @@ public class SubContentAdapter extends RecyclerView.Adapter<SubContentAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return subcontentlist.size();
+        return ruanganlist.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.beranda.BerandaFragment">
+    android:background="#F6F1F1"
+    tools:context=".pages.beranda.BerandaFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -93,7 +94,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RViewBeranda"
+        android:id="@+id/RVberanda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

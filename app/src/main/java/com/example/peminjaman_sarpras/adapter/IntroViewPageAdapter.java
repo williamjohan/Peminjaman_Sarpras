@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.peminjaman_sarpras.R;
-import com.example.peminjaman_sarpras.constructor.ScreenItemConstructor;
+import com.example.peminjaman_sarpras.model.IntroView_Model;
 
 import java.util.List;
 
 public class IntroViewPageAdapter extends PagerAdapter {
 
     Context mcontex;
-    List<ScreenItemConstructor> mListScreen ;
+    List<IntroView_Model> mListScreen ;
 
-    public IntroViewPageAdapter(Context mcontex, List<ScreenItemConstructor> mListScreen) {
+    public IntroViewPageAdapter(Context mcontex, List<IntroView_Model> mListScreen) {
         this.mcontex = mcontex;
         this.mListScreen = mListScreen;
     }

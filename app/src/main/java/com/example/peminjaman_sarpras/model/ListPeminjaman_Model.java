@@ -1,13 +1,14 @@
-package com.example.peminjaman_sarpras.constructor;
+package com.example.peminjaman_sarpras.model;
 
-public class ContentConstructor {
+public class ListPeminjaman_Model {
+    private int id; //primary key
     private String namacontent;
     private String imageresname;
-    private int id;
+
     private int jumlahruangan;
 
 
-    public ContentConstructor(int id, String namacontent, String imageresname , int jumlahruangan) {
+    public ListPeminjaman_Model(int id, String namacontent, String imageresname , int jumlahruangan) {
         this.namacontent = namacontent;
         this.imageresname = imageresname;
         this.id = id;

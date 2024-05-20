@@ -3,6 +3,9 @@
     <style name="Theme.App" parent="Theme.Material3.DayNight">
         ...
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+
     </style>
 
     <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
@@ -16,5 +19,14 @@
         <!-- icon -->
         <item name="colorOnSecondaryContainer">@color/getstarted</item>
         <item name="colorOnSurfaceVariant">#8D8A8F</item>
+    </style>
+
+
+    <style name="myTextprefference">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:color">#000000</item>
     </style>
 </resources>

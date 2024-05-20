@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".allpages.SubDetailContent">
+    tools:context=".pages.beranda.DetailRuanganPages">
 
 
         <androidx.cardview.widget.CardView

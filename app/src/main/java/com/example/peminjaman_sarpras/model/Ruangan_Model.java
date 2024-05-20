@@ -1,15 +1,15 @@
-package com.example.peminjaman_sarpras.constructor;
+package com.example.peminjaman_sarpras.model;
 
-public class SubContentConstructor {
+public class Ruangan_Model {
 
-    private int idlist;
-    private int idruangan;
+    private int idlist; //foreign key
+    private int idruangan; //primary key
     private String namaruangan;
     private String gambar;
     private String lokasiruangan;
     private int hargaruangan;
 
-    public SubContentConstructor(int idlist, int idruangan, String namaruangan, String gambar, String lokasiruangan, int hargaruangan) {
+    public Ruangan_Model(int idlist, int idruangan, String namaruangan, String gambar, String lokasiruangan, int hargaruangan) {
         this.idlist= idlist;
         this.idruangan = idruangan;
         this.namaruangan = namaruangan;

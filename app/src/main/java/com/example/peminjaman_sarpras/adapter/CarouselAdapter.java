@@ -10,16 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.peminjaman_sarpras.R;
-import com.example.peminjaman_sarpras.constructor.GambarRuanganConstructor;
+import com.example.peminjaman_sarpras.model.DetailRuangan_Model;
 
 import java.util.List;
 
 public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.ViewHolder> {
 
-    private List<GambarRuanganConstructor> listimageresource;
+    private List<DetailRuangan_Model> listimageresource;
     private Context context;
 
-    public CarouselAdapter(List<GambarRuanganConstructor> imageresource, Context context) {
+    public CarouselAdapter(List<DetailRuangan_Model> imageresource, Context context) {
         this.listimageresource = imageresource;
         this.context = context;
     }
@@ -35,7 +35,7 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CarouselAdapter.ViewHolder holder, int position) {
-        GambarRuanganConstructor image = listimageresource.get(position);
+        DetailRuangan_Model image = listimageresource.get(position);
         int imagecontent = context.getResources().getIdentifier(image.getResgambar(),"drawable",context.getPackageName());
 
         if (imagecontent == 0) {

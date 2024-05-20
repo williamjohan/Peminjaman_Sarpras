@@ -1,21 +1,28 @@
 package com.example.peminjaman_sarpras;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowInsetsController;
+import android.view.WindowManager;
 import android.window.OnBackInvokedDispatcher;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.peminjaman_sarpras.database.DBHelper;
 import com.example.peminjaman_sarpras.database.DataInitializer;
 import com.example.peminjaman_sarpras.databinding.ActivityMainBinding;
-import com.example.peminjaman_sarpras.ui.beranda.BerandaFragment;
-import com.example.peminjaman_sarpras.ui.profile.ProfileFragment;
-import com.example.peminjaman_sarpras.ui.riwayat.RiwayatFragment;
+import com.example.peminjaman_sarpras.pages.beranda.BerandaFragment;
+import com.example.peminjaman_sarpras.pages.profile.ProfileFragment;
+import com.example.peminjaman_sarpras.pages.riwayat.RiwayatFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -31,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private int currentFragmentId;
+    private Window window;
+    private WindowInsetsController controller;
 
 
 
@@ -56,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
         }
         //hide actionbar
         getSupportActionBar().hide();
+        //make the activity on full screen
+
+
+
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
@@ -67,11 +81,21 @@ public class MainActivity extends AppCompatActivity {
         if (getIntent() != null && getIntent().hasExtra("navigateTo")) {
             Fragment selectedFragment = null;
             String destination = getIntent().getStringExtra("navigateTo");
+            int idRuangan = getIntent().getIntExtra("idRuangan", -1);
             hasNavigatedFromIntent = true;
 
             if (destination != null && destination.equals("riwayat")) {
                 selectedFragment = new RiwayatFragment();
+                //mengirim id ruangan ke riwayat
+                Bundle args = new Bundle();
+
+                Log.d("di main activity", "ini nilainya" + String.valueOf(idRuangan));
+
+                args.putInt("idRuangan", idRuangan);
+                selectedFragment.setArguments(args);
+
                 bottomNavigationView.setSelectedItemId(R.id.navigation_riwayat);
+
             } else if(destination != null && destination.equals("profile")) {
                 selectedFragment = new ProfileFragment();
                 bottomNavigationView.setSelectedItemId(R.id.navigation_profile);
@@ -110,12 +134,20 @@ public class MainActivity extends AppCompatActivity {
                         if (itemId == R.id.navigation_beranda) {
                             selectedFragment = new BerandaFragment();
                             selectedItem = R.id.navigation_beranda;
+                            setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.getstarted));
+
                         } else if (itemId == R.id.navigation_riwayat) {
                             selectedFragment = new RiwayatFragment();
                             selectedItem = R.id.navigation_riwayat;
+                            setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.getstarted));
+
+
                         } else if (itemId == R.id.navigation_profile) {
                             selectedFragment = new ProfileFragment();
                             selectedItem = R.id.navigation_profile;
+                            setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.white));
+                            setStatusBarTextDark(true);
+
                         }
                         currentFragmentId = itemId;
                         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_activity_main,
@@ -151,6 +183,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(SELECTED_ITEM, selectedItem);
+    }
+
+    public void setStatusBarColor(int color) {
+        window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(color);
+    }
+
+    public void setStatusBarTextDark(boolean dark) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            controller = getWindow().getInsetsController();
+            if (controller != null) {
+                if (dark) {
+                    controller.setSystemBarsAppearance(
+                            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                    );
+                } else {
+                    controller.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS);
+                }
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            View decor = getWindow().getDecorView();
+            if (dark) {
+                decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            } else {
+                decor.setSystemUiVisibility(0);
+            }
+        }
     }
 
 }

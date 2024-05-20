@@ -1,12 +1,12 @@
-package com.example.peminjaman_sarpras.constructor;
+package com.example.peminjaman_sarpras.model;
 
-public class GambarRuanganConstructor {
+public class DetailRuangan_Model {
 
     private int idgambar;
     private int idruangan;
     private String resgambar;
 
-    public GambarRuanganConstructor(int idruangan, int idgambar, String resgambar) {
+    public DetailRuangan_Model(int idruangan, int idgambar, String resgambar) {
         this.idgambar = idgambar;
         this.idruangan = idruangan;
         this.resgambar = resgambar;

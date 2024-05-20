@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_beranda"
-        android:name="com.example.peminjaman_sarpras.ui.beranda.BerandaFragment"
+        android:name="com.example.peminjaman_sarpras.pages.beranda.BerandaFragment"
         android:label="@string/title_Beranda"
         tools:layout="@layout/fragment_beranda" />
 
     <fragment
         android:id="@+id/navigation_riwayat"
-        android:name="com.example.peminjaman_sarpras.ui.riwayat.RiwayatFragment"
+        android:name="com.example.peminjaman_sarpras.pages.riwayat.RiwayatFragment"
         android:label="@string/title_Riwayat"
         tools:layout="@layout/fragment_riwayat" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.peminjaman_sarpras.ui.profile.ProfileFragment"
+        android:name="com.example.peminjaman_sarpras.pages.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

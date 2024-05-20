@@ -12,22 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.peminjaman_sarpras.R;
-import com.example.peminjaman_sarpras.allpages.SubContent;
-import com.example.peminjaman_sarpras.constructor.ContentConstructor;
+import com.example.peminjaman_sarpras.model.ListPeminjaman_Model;
+import com.example.peminjaman_sarpras.pages.beranda.RuanganPages;
 
 import java.util.List;
 
-public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHolder> {
+public class ListPeminjamanAdapter extends RecyclerView.Adapter<ListPeminjamanAdapter.ViewHolder> {
 
-    private List<ContentConstructor> listcontent;
-
-
-
-
+    private List<ListPeminjaman_Model> listcontent;
 
     private Context context;
 
-    public ContentAdapter(List<ContentConstructor> listcontent, Context context) {
+    public ListPeminjamanAdapter(List<ListPeminjaman_Model> listcontent, Context context) {
         this.listcontent = listcontent;
         this.context = context;
 
@@ -35,16 +31,16 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHold
 
     @NonNull
     @Override
-    public ContentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listcontent,parent,false);
+    public ListPeminjamanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listpeminjaman,parent,false);
         return new ViewHolder(view);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ContentAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListPeminjamanAdapter.ViewHolder holder, int position) {
     // buat mentransfer nilai dari content
-        ContentConstructor classcontent = listcontent.get(position);
+        ListPeminjaman_Model classcontent = listcontent.get(position);
 
 
         //transfer title dan jumlah venue ke holder
@@ -66,7 +62,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHold
 
                 int idlistcontent = listcontent.get(position).getId();
 
-                Intent intent = new Intent(context, SubContent.class);
+                Intent intent = new Intent(context, RuanganPages.class);
                 intent.putExtra("navigateTo", "riwayat");
                 intent.putExtra("namacontent",namajudul);
                 intent.putExtra("idlistcontent",idlistcontent);

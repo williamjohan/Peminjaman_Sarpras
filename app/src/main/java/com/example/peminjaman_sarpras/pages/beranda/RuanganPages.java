@@ -1,4 +1,4 @@
-package com.example.peminjaman_sarpras.allpages;
+package com.example.peminjaman_sarpras.pages.beranda;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,26 +11,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.peminjaman_sarpras.R;
-import com.example.peminjaman_sarpras.adapter.SubContentAdapter;
-import com.example.peminjaman_sarpras.constructor.SubContentConstructor;
+import com.example.peminjaman_sarpras.adapter.RuanganAdapter;
+import com.example.peminjaman_sarpras.model.Ruangan_Model;
 import com.example.peminjaman_sarpras.database.DBHelper;
 
 import java.util.List;
 
-public class SubContent extends AppCompatActivity {
+public class RuanganPages extends AppCompatActivity {
 
     private TextView judulbar;
     private ImageView imgback;
 
     private RecyclerView recyclerView;
-    private SubContentAdapter subcontentadapter;
+    private RuanganAdapter subcontentadapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_sub_content);
+        setContentView(R.layout.activity_ruangan);
 
         //menghilangkan action bar
         getSupportActionBar().hide();
@@ -48,17 +48,17 @@ public class SubContent extends AppCompatActivity {
         int idcontent = extras.getInt("idlistcontent");
 
         // ngecek aja di log
-//        Log.d("SubContent", "namacontent: " + tampungnamacontent);
-//        Log.d("SubContent", "idlistcontent: " + idcontent);
+//        Log.d("RuanganPages", "namacontent: " + tampungnamacontent);
+//        Log.d("RuanganPages", "idlistcontent: " + idcontent);
 
 
         //inisiasi class dbhelper
         DBHelper db = new DBHelper(this);
         //memanggil isi data di dbhelper ditampung di listcontent
-        List<SubContentConstructor> listsubcontent = db.getallruangan(idcontent);
+        List<Ruangan_Model> listsubcontent = db.getallruangan(idcontent);
 
         //memasukkan isi listcontent ke adapter
-        subcontentadapter = new SubContentAdapter(listsubcontent,this);
+        subcontentadapter = new RuanganAdapter(listsubcontent,this);
         recyclerView.setAdapter(subcontentadapter);
 
 

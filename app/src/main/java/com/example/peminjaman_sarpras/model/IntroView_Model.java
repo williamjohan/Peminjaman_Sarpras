@@ -1,11 +1,11 @@
-package com.example.peminjaman_sarpras.constructor;
+package com.example.peminjaman_sarpras.model;
 
-public class ScreenItemConstructor {
+public class IntroView_Model {
 
     String title , description;
     int ScreenImg;
 
-    public ScreenItemConstructor(String title, String description, int screenImg) {
+    public IntroView_Model(String title, String description, int screenImg) {
         this.title = title;
         this.description = description;
         ScreenImg = screenImg;
