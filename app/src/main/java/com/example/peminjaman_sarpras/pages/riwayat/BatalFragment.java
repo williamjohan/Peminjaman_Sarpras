@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,10 +24,13 @@ public class BatalFragment extends Fragment {
     private List<Pemesanan_Model> listpemesananbatal;
     private PemesananAdapter pemesananAdapter;
     private DBHelper db;
+    private ViewStub viewStub;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //inisiasi class dbhelper
+        db = new DBHelper(getContext());
     }
 
     @Nullable
@@ -35,17 +39,13 @@ public class BatalFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_batal, container, false);
 
         recyclerView = view.findViewById(R.id.RVBatal);
+        viewStub = view.findViewById(R.id.VSnodata);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //inisiasi class dbhelper
-        new DBHelper(getContext());
 
-//        listpemesananbatal = db.getallpemesanan();
-//        pemesananAdapter = new PemesananAdapter(listpemesananbatal);
-//        recyclerView.setAdapter(pemesananAdapter);
+        loadData();
 
         return view;
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -53,14 +53,30 @@ public class BatalFragment extends Fragment {
     }
 
     private void loadData() {
-        db = new DBHelper(getContext());
-        listpemesananbatal = db.getPemesananByStatus("cancel");
-        pemesananAdapter = new PemesananAdapter(listpemesananbatal,getContext(),"fragmentbatal");
-        recyclerView.setAdapter(pemesananAdapter);
 
-//        listpemesananbatal = db.getallpemesananbatal();
-//        pemesananAdapter = new PemesananAdapter(getContext(), listpemesananbatal);
-//        recyclerView.setAdapter(pemesananAdapter);
+
+        listpemesananbatal = db.getPemesananByStatus("cancel");
+        if (listpemesananbatal.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            viewStub.setVisibility(View.VISIBLE);
+        } else {
+            viewStub.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            pemesananAdapter = new PemesananAdapter(listpemesananbatal, getContext(), "fragmentbatal");
+            recyclerView.setAdapter(pemesananAdapter);
+        }
+
+        listpemesananbatal = db.getPemesananByStatus("cancel");
+        if (listpemesananbatal.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            viewStub.setVisibility(View.VISIBLE);
+        } else {
+            viewStub.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            pemesananAdapter = new PemesananAdapter(listpemesananbatal, getContext(), "fragmentbatal");
+            recyclerView.setAdapter(pemesananAdapter);
+        }
+
     }
 
 }

@@ -1,8 +1,6 @@
 package com.example.peminjaman_sarpras.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +31,12 @@ public class PemesananAdapter extends RecyclerView.Adapter<PemesananAdapter.View
     private String fragmentType;
 
 
+
     public PemesananAdapter(List<Pemesanan_Model> listpemesanan, Context context , String fragmentType) {
         this.listpemesanan = listpemesanan;
         this.context = context;
         this.fragmentType = fragmentType;
         db = new DBHelper(context);
-
     }
 
     @NonNull
@@ -86,9 +84,6 @@ public class PemesananAdapter extends RecyclerView.Adapter<PemesananAdapter.View
             hargaritempesanan.setText("Rp " + decimalformatter.format(pemesanan_model.getHargaruangan()) + " /Jam");
 
             if ("fragmentproses".equals(fragmentType)) {
-                Log.d("namaruangan_proses", pemesanan_model.getNamaruangan());
-                Log.d("hargaruangan_proses", String.valueOf(pemesanan_model.getHargaruangan()));
-                Log.d("gambarproses_proses", pemesanan_model.getGambarruangan());
                 statuspemesanan.setText("Menunggu Pembayaran");
                 btnaction.setText("Cancel");
                 btnaction.setBackground(context.getResources().getDrawable(R.drawable.btn_warning_style_red));
@@ -110,12 +105,14 @@ public class PemesananAdapter extends RecyclerView.Adapter<PemesananAdapter.View
                         db.updateStatusPemesanan(idpemesanan, "cancel");
                         pemesanan_model.setStatuspemesanan("cancel");
 
+
                         //hapus yang di list ( bukan yang di db)
                         listpemesanan.remove(position);
                         notifyItemRemoved(position);
                         notifyItemRangeChanged(position, listpemesanan.size());
                         Toast toast = Toast.makeText(context, "Transaksi Dibatalkan", Toast.LENGTH_SHORT);
                         toast.show();
+//                        ProsesFragment.cancelpesanan();
                     }
                 });
 
@@ -123,19 +120,19 @@ public class PemesananAdapter extends RecyclerView.Adapter<PemesananAdapter.View
                 // Add button click listener for cancel action
             } else if ("fragmentbatal".equals(fragmentType)) {
 
-                Log.d("namaruangan_batal", pemesanan_model.getNamaruangan());
-                Log.d("hargaruangan_batal", String.valueOf(pemesanan_model.getHargaruangan()));
-                Log.d("gambarproses_batal", pemesanan_model.getGambarruangan());
-                Cvstatus.setBackgroundColor(context.getColor(R.color.black));
-                Cvstatus.setRadius(200);
+
+                Cvstatus.setRadius(15);
+                Cvstatus.setCardBackgroundColor(context.getResources().getColor(R.color.CVbatal));
                 statuspemesanan.setText("Transaksi Batal");
+
                 btnaction.setText("Reorder");
                 //transfer gambar ke holder
                 int imageResource = context.getResources().getIdentifier(pemesanan_model.getGambarruangan(), "drawable", context.getPackageName());
                 gambarpesanan.setImageResource(imageResource);
-                btnaction.setBackgroundColor(Color.GREEN); // Change to your desired color
+                btnaction.setBackground(context.getResources().getDrawable(R.drawable.btn_gradient_style)); // Change to your desired color
                 // Add button click listener for reorder action
             }
         }
     }
+
 }

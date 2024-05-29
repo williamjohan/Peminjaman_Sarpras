@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -93,7 +94,8 @@ public class DetailRuanganPages extends AppCompatActivity {
 
                 String query = "INSERT INTO pemesanan (id_ruangan, status_pemesanan) VALUES (" + idruangan + ", '" + statuspesanan + "')";
                 db.dml(query);
-                Log.d("insert" , "sukses");
+
+                Toast.makeText(DetailRuanganPages.this, "Berhasil Booking", Toast.LENGTH_SHORT).show();
 
                 // TODO: tampilkan dialog message dan pergi ke riwayat
                 // Buat Intent untuk kembali ke MainActivity
@@ -101,7 +103,6 @@ public class DetailRuanganPages extends AppCompatActivity {
                 // Sertakan informasi bahwa navigasi ke RiwayatFragment harus dilakukan
                 intent.putExtra("navigateTo", "riwayat");
                 intent.putExtra("idRuangan",idruangan);
-                Log.d("DetailRuanganPages", "onClick: " + intent);
                 // Mulai activity MainActivity
                 startActivity(intent);
                 // Selesaikan activity saat ini
@@ -116,8 +117,3 @@ public class DetailRuanganPages extends AppCompatActivity {
         });
     }
 }
-
-///
-//                NavController navController = Navigation.findNavController(DetailRuanganPages.this, R.id.nav_host_fragment_activity_main);
-//                navController.navigate(R.id.navigation_riwayat);
-//                finish();

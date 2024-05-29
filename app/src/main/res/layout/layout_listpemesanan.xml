@@ -30,24 +30,23 @@
                     android:id="@+id/CVstatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/gradient_start_color"
                     app:cardCornerRadius="10dp"
+                    app:cardBackgroundColor="@color/CVbatal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/TVStatus"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="3dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp"
                         android:fontFamily="@font/poppins"
                         android:text="Status"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/batal"
+                        android:textStyle="bold" />
 
                 </androidx.cardview.widget.CardView>
 

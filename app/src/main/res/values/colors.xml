@@ -22,5 +22,8 @@
     <!--color for tab layout indicotr-->
     <color name="tab_indicator_default">#BDBDC5</color>
 
+    <!-- color untuk view pemesanan-->
+    <color name="batal">#F42A2A</color>
+    <color name="CVbatal">#F8D1DF</color>
     <color name="transparent">#00000000</color>
 </resources>
