@@ -1,12 +1,22 @@
 package com.example.peminjaman_sarpras.model;
 
-public class DetailRuangan_Model {
+import com.google.gson.annotations.SerializedName;
 
+public class DetailGambarRuangan_Model {
+
+    @SerializedName("idgambar")
     private int idgambar;
+
+    @SerializedName("idruangan")
     private int idruangan;
+
+    @SerializedName("resgambar")
     private String resgambar;
 
-    public DetailRuangan_Model(int idruangan, int idgambar, String resgambar) {
+    // Default constructor required for Retrofit
+    public DetailGambarRuangan_Model() {}
+
+    public DetailGambarRuangan_Model(int idruangan, int idgambar, String resgambar) {
         this.idgambar = idgambar;
         this.idruangan = idruangan;
         this.resgambar = resgambar;

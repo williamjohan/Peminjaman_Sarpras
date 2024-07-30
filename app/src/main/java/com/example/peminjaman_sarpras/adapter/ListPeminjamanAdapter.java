@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.peminjaman_sarpras.R;
 import com.example.peminjaman_sarpras.model.ListPeminjaman_Model;
 import com.example.peminjaman_sarpras.pages.beranda.RuanganPages;
@@ -42,14 +43,24 @@ public class ListPeminjamanAdapter extends RecyclerView.Adapter<ListPeminjamanAd
     // buat mentransfer nilai dari content
         ListPeminjaman_Model classcontent = listcontent.get(position);
 
-
         //transfer title dan jumlah venue ke holder
         holder.titletextview.setText(classcontent.getNamacontent());
+
         holder.jumlahruangannya.setText(" Tersedia " + classcontent.getJumlahruangan() + " Venue");
+        String imageUrl = classcontent.getImageresname();
+
+        // gambar adalah URL
+
+        Glide.with(context)
+                .load(imageUrl) // URL gambar dari model
+                .centerCrop()
+//                .placeholder(R.drawable.placeholder) // Placeholder jika gambar belum dimuat
+//                .error(R.drawable.error_image) // Gambar error jika gagal memuat
+                .into(holder.viewimage);
 
         //mentransfer gambar ke holder , tapi dibuat dulu penampung gambarnya
-        int imagecontent = context.getResources().getIdentifier(classcontent.getImageresname(),"drawable",context.getPackageName());
-        holder.viewimage.setImageResource(imagecontent);
+//        int imagecontent = context.getResources().getIdentifier(classcontent.getImageresname(),"drawable",context.getPackageName());
+//        holder.viewimage.setImageResource(imagecontent);
 
 
         //TODO On click ketika item view diklik
@@ -91,4 +102,11 @@ public class ListPeminjamanAdapter extends RecyclerView.Adapter<ListPeminjamanAd
             viewimage = itemView.findViewById(R.id.imgcontent);
         }
     }
+
+    public void updateData(List<ListPeminjaman_Model> newList) {
+        listcontent = newList;
+        notifyDataSetChanged();
+    }
+
+
 }

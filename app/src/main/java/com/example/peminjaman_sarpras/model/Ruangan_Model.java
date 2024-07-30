@@ -1,16 +1,29 @@
 package com.example.peminjaman_sarpras.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Ruangan_Model {
 
-    private int idlist; //foreign key
-    private int idruangan; //primary key
+    @SerializedName("idlist")
+    private int idlist; // foreign key
+
+    @SerializedName("idruangan")
+    private int idruangan; // primary key
+
+    @SerializedName("namaruangan")
     private String namaruangan;
+
+    @SerializedName("gambar")
     private String gambar;
+
+    @SerializedName("lokasiruangan")
     private String lokasiruangan;
+
+    @SerializedName("hargaruangan")
     private int hargaruangan;
 
     public Ruangan_Model(int idlist, int idruangan, String namaruangan, String gambar, String lokasiruangan, int hargaruangan) {
-        this.idlist= idlist;
+        this.idlist = idlist;
         this.idruangan = idruangan;
         this.namaruangan = namaruangan;
         this.gambar = gambar;
@@ -18,7 +31,24 @@ public class Ruangan_Model {
         this.hargaruangan = hargaruangan;
     }
 
-    public String getNamaruangan() {return namaruangan;
+    public int getIdlist() {
+        return idlist;
+    }
+
+    public void setIdlist(int idlist) {
+        this.idlist = idlist;
+    }
+
+    public int getIdruangan() {
+        return idruangan;
+    }
+
+    public void setIdruangan(int idruangan) {
+        this.idruangan = idruangan;
+    }
+
+    public String getNamaruangan() {
+        return namaruangan;
     }
 
     public void setNamaruangan(String namaruangan) {
@@ -47,21 +77,5 @@ public class Ruangan_Model {
 
     public void setHargaruangan(int hargaruangan) {
         this.hargaruangan = hargaruangan;
-    }
-
-    public int getIdlist() {
-        return idlist;
-    }
-
-    public void setIdlist(int idlist) {
-        this.idlist = idlist;
-    }
-
-    public int getIdruangan() {
-        return idruangan;
-    }
-
-    public void setIdruangan(int idruangan) {
-        this.idruangan = idruangan;
     }
 }

@@ -11,9 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.peminjaman_sarpras.R;
-import com.example.peminjaman_sarpras.pages.beranda.DetailRuanganPages;
 import com.example.peminjaman_sarpras.model.Ruangan_Model;
+import com.example.peminjaman_sarpras.pages.beranda.DetailRuanganPages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,19 +46,26 @@ public class RuanganAdapter extends RecyclerView.Adapter<RuanganAdapter.ViewHold
         holder.hargaruangan.setText("Rp." + ruangan.getHargaruangan() + " /Jam");
         holder.lokasiruangan.setText(ruangan.getLokasiruangan());
 
-        //transfer gambar ke holder
-        int imageResource = context.getResources().getIdentifier(ruangan.getGambar(), "drawable", context.getPackageName());
-        holder.gambarruangan.setImageResource(imageResource);
+        String imageUrl = ruangan.getGambar();
+
+        //transfer gambar ke holder pakai glide ( URL )
+        Glide.with(context)
+                .load(imageUrl)
+                .centerCrop()
+//                .placeholder(R.drawable.placeholder_image) // Gambar placeholder
+                .into(holder.gambarruangan);
+
+//        int imageResource = context.getResources().getIdentifier(ruangan.getGambar(), "drawable", context.getPackageName());
+//        holder.gambarruangan.setImageResource(imageResource);
 
 
         //TODO ketika item di adapter di klik
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int position = holder.getAdapterPosition();
-                int idruangan = ruanganlist.get(position).getIdruangan();
-                String namaRuangan = ruanganlist.get(position).getNamaruangan();
-                int hargaRuangan = ruanganlist.get(position).getHargaruangan();
+                int idruangan = ruangan.getIdruangan();
+                String namaRuangan = ruangan.getNamaruangan();
+                int hargaRuangan = ruangan.getHargaruangan();
 
 
                 Intent intent = new Intent(context, DetailRuanganPages.class);

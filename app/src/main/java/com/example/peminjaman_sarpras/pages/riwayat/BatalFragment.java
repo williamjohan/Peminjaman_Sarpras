@@ -42,41 +42,41 @@ public class BatalFragment extends Fragment {
         viewStub = view.findViewById(R.id.VSnodata);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        loadData();
+//        loadData();
 
         return view;
     }
     @Override
     public void onResume() {
         super.onResume();
-        loadData();
+//        loadData();
     }
 
-    private void loadData() {
-
-
-        listpemesananbatal = db.getPemesananByStatus("cancel");
-        if (listpemesananbatal.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-            viewStub.setVisibility(View.VISIBLE);
-        } else {
-            viewStub.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-            pemesananAdapter = new PemesananAdapter(listpemesananbatal, getContext(), "fragmentbatal");
-            recyclerView.setAdapter(pemesananAdapter);
-        }
-
-        listpemesananbatal = db.getPemesananByStatus("cancel");
-        if (listpemesananbatal.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-            viewStub.setVisibility(View.VISIBLE);
-        } else {
-            viewStub.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-            pemesananAdapter = new PemesananAdapter(listpemesananbatal, getContext(), "fragmentbatal");
-            recyclerView.setAdapter(pemesananAdapter);
-        }
-
-    }
+////    private void loadData() {
+////
+////
+////        listpemesananbatal = db.getPemesananByStatus("cancel");
+////        if (listpemesananbatal.isEmpty()) {
+////            recyclerView.setVisibility(View.GONE);
+////            viewStub.setVisibility(View.VISIBLE);
+////        } else {
+////            viewStub.setVisibility(View.GONE);
+////            recyclerView.setVisibility(View.VISIBLE);
+////            pemesananAdapter = new PemesananAdapter(listpemesananbatal, getContext(), "fragmentbatal");
+////            recyclerView.setAdapter(pemesananAdapter);
+////        }
+////
+////        listpemesananbatal = db.getPemesananByStatus("cancel");
+////        if (listpemesananbatal.isEmpty()) {
+////            recyclerView.setVisibility(View.GONE);
+////            viewStub.setVisibility(View.VISIBLE);
+////        } else {
+////            viewStub.setVisibility(View.GONE);
+////            recyclerView.setVisibility(View.VISIBLE);
+////            pemesananAdapter = new PemesananAdapter(listpemesananbatal, getContext(), "fragmentbatal");
+////            recyclerView.setAdapter(pemesananAdapter);
+////        }
+//
+//    }
 
 }

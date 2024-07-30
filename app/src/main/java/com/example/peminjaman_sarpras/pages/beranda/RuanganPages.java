@@ -4,18 +4,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.peminjaman_sarpras.API.ApiClient;
+import com.example.peminjaman_sarpras.API.ApiService;
 import com.example.peminjaman_sarpras.R;
 import com.example.peminjaman_sarpras.adapter.RuanganAdapter;
 import com.example.peminjaman_sarpras.model.Ruangan_Model;
-import com.example.peminjaman_sarpras.database.DBHelper;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RuanganPages extends AppCompatActivity {
 
@@ -24,6 +30,7 @@ public class RuanganPages extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RuanganAdapter subcontentadapter;
+    private ApiService apiService;
 
 
     @Override
@@ -42,24 +49,20 @@ public class RuanganPages extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Bundle extras = getIntent().getExtras();
-
         judulbar.setText(extras.getString("namacontent"));
-
         int idcontent = extras.getInt("idlistcontent");
 
-        // ngecek aja di log
-//        Log.d("RuanganPages", "namacontent: " + tampungnamacontent);
-//        Log.d("RuanganPages", "idlistcontent: " + idcontent);
+        //inisiasi ApiService
+        apiService = ApiClient.getClient().create(ApiService.class);
+
+        //memanggil data dari API
+        fetchRuangan(idcontent);
 
 
-        //inisiasi class dbhelper
-        DBHelper db = new DBHelper(this);
-        //memanggil isi data di dbhelper ditampung di listcontent
-        List<Ruangan_Model> listsubcontent = db.getallruangan(idcontent);
-
-        //memasukkan isi listcontent ke adapter
-        subcontentadapter = new RuanganAdapter(listsubcontent,this);
-        recyclerView.setAdapter(subcontentadapter);
+//        //inisiasi class dbhelper
+//        DBHelper db = new DBHelper(this);
+//        //memanggil isi data di dbhelper ditampung di listcontent
+//        List<Ruangan_Model> listsubcontent = db.getallruangan(idcontent);
 
 
         imgback.setOnClickListener(new View.OnClickListener() {
@@ -70,5 +73,28 @@ public class RuanganPages extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void fetchRuangan(int idcontent) {
+        Call<List<Ruangan_Model>> call = apiService.getRuangan(idcontent);
+        call.enqueue(new Callback<List<Ruangan_Model>>() {
+            @Override
+            public void onResponse(Call<List<Ruangan_Model>> call, Response<List<Ruangan_Model>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Ruangan_Model> listsubcontent = response.body();
+                    subcontentadapter = new RuanganAdapter(listsubcontent, RuanganPages.this);
+                    recyclerView.setAdapter(subcontentadapter);
+                } else {
+                    // Tangani jika response tidak berhasil
+                    Toast.makeText(RuanganPages.this, "Data tidak ditemukan", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Ruangan_Model>> call, Throwable t) {
+                // Tangani kegagalan
+                Toast.makeText(RuanganPages.this, "Terjadi kesalahan: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

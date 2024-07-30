@@ -1,7 +1,6 @@
 package com.example.peminjaman_sarpras.pages.riwayat;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +31,9 @@ public class RiwayatFragment extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_riwayat, container, false);
 
 
-
         if (getArguments() != null) {
             int idRuangan = getArguments().getInt("idRuangan", -1);
-            Log.d("RiwayatFragment", "idRuangan: " + idRuangan);
+//            Log.d("RiwayatFragment", "idRuangan: " + idRuangan);
             // Kirim id ruangan ke PesananProsesFragment menggunakan Bundle
             ProsesFragment prosesFragment = new ProsesFragment();
             Bundle args = new Bundle();
@@ -57,6 +55,11 @@ public class RiwayatFragment extends Fragment  {
         // Inisialisasi TabLayout dan NavHostFragment
         tabLayout = view.findViewById(R.id.tablayoutRiwayat);
         navHostFragment = (NavHostFragment) getChildFragmentManager().findFragmentById(R.id.fragmentContainerView);
+
+        if (navHostFragment != null) {
+            navHostFragment.getNavController().navigate(R.id.navigation_proses);
+        }
+
 
         // Atur listener untuk mengubah fragment saat tab dipilih
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

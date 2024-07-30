@@ -91,7 +91,7 @@
                 app:srcCompat="@drawable/red_circle" />
 
             <EditText
-                android:id="@+id/edit_text_search"
+                android:id="@+id/ETsearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

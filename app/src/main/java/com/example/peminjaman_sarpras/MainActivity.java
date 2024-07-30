@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
         //make the activity on full screen
 
 
-
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         bottomNavigationView = findViewById(R.id.bottom_nav_view);

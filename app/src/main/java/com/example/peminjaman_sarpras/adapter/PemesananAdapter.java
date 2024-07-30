@@ -1,6 +1,9 @@
 package com.example.peminjaman_sarpras.adapter;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,30 +16,35 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.peminjaman_sarpras.API.ApiClient;
+import com.example.peminjaman_sarpras.API.ApiService;
 import com.example.peminjaman_sarpras.R;
-import com.example.peminjaman_sarpras.database.DBHelper;
 import com.example.peminjaman_sarpras.model.Pemesanan_Model;
+import com.example.peminjaman_sarpras.model.Ruangan_Model;
+import com.example.peminjaman_sarpras.response.Pemesanan_Response;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class PemesananAdapter extends RecyclerView.Adapter<PemesananAdapter.ViewHolder>{
 
     private List<Pemesanan_Model> listpemesanan = new ArrayList<>();
-    private  Context context;
-    private  DecimalFormat decimalformatter = new DecimalFormat("#,###,###");
-    ;
-    private DBHelper db;
+    private Context context;
+    private DecimalFormat decimalformatter = new DecimalFormat("#,###,###");
     private String fragmentType;
+    private ApiService apiService;
 
-
-
-    public PemesananAdapter(List<Pemesanan_Model> listpemesanan, Context context , String fragmentType) {
+    public PemesananAdapter(List<Pemesanan_Model> listpemesanan, Context context, String fragmentType) {
         this.listpemesanan = listpemesanan;
         this.context = context;
         this.fragmentType = fragmentType;
-        db = new DBHelper(context);
+        apiService = ApiClient.getClient().create(ApiService.class);
     }
 
     @NonNull
@@ -48,11 +56,8 @@ public class PemesananAdapter extends RecyclerView.Adapter<PemesananAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull PemesananAdapter.ViewHolder holder, int position) {
-        position = holder.getAdapterPosition();
         Pemesanan_Model pemesanan_model = listpemesanan.get(position);
         holder.bind(pemesanan_model);
-
-
     }
 
     @Override
@@ -60,12 +65,12 @@ public class PemesananAdapter extends RecyclerView.Adapter<PemesananAdapter.View
         return listpemesanan.size();
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView namaitempesanan , hargaritempesanan , tanggalpesan , jamitempesanan , statuspemesanan;
-        ImageView gambarpesanan ;
+        TextView namaitempesanan, hargaritempesanan, tanggalpesan, jamitempesanan, statuspemesanan;
+        ImageView gambarpesanan;
         Button btnaction;
         CardView Cvstatus;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             namaitempesanan = itemView.findViewById(R.id.TVnamaruanganpesanan);
@@ -79,60 +84,101 @@ public class PemesananAdapter extends RecyclerView.Adapter<PemesananAdapter.View
         }
 
         public void bind(Pemesanan_Model pemesanan_model) {
-            // Customize button based on fragment type
-            namaitempesanan.setText(pemesanan_model.getNamaruangan());
-            hargaritempesanan.setText("Rp " + decimalformatter.format(pemesanan_model.getHargaruangan()) + " /Jam");
+            statuspemesanan.setText(pemesanan_model.getStatusPemesanan());
+
+            // Initiate dan call get API ruangan
+            Call<Ruangan_Model> call = apiService.getRuanganById(pemesanan_model.getIdRuangan());
+            call.enqueue(new Callback<Ruangan_Model>() {
+                @Override
+                public void onResponse(Call<Ruangan_Model> call, Response<Ruangan_Model> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        Ruangan_Model ruangan = response.body();
+                        namaitempesanan.setText(ruangan.getNamaruangan());
+                        hargaritempesanan.setText("Rp " + decimalformatter.format(ruangan.getHargaruangan()) + " /Jam");
+
+                        // Glide untuk ambil gambar
+                        Glide.with(context)
+                                .load(ruangan.getGambar())
+                                .into(gambarpesanan);
+
+                    } else {
+                        Log.e("PemesananAdapter", "Response error: " + response.code() + " - " + response.message());
+                        Toast.makeText(context, "Ruangan tidak ditemukan", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Ruangan_Model> call, Throwable throwable) {
+                    Log.e("PemesananAdapter", "API call failed", throwable);
+                    Toast.makeText(context, "Gagal mengambil data ruangan", Toast.LENGTH_SHORT).show();
+                }
+            });
 
             if ("fragmentproses".equals(fragmentType)) {
                 statuspemesanan.setText("Menunggu Pembayaran");
                 btnaction.setText("Cancel");
                 btnaction.setBackground(context.getResources().getDrawable(R.drawable.btn_warning_style_red));
 
-                //TODO buat Date and Time picker layout untuk inputan
-                //sementara di hold dulu , krn blm dibuat layout untuk time dan date picker.
-//        holder.tanggalpesan.setText(pemesanan_model.getLokasiruangan());
-//        holder.jamitempesanan.setText(pemesanan_model.getJamruangan());
-
-                //transfer gambar ke holder
-                int imageResource = context.getResources().getIdentifier(pemesanan_model.getGambarruangan(), "drawable", context.getPackageName());
-                gambarpesanan.setImageResource(imageResource);
-
-                btnaction.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        int position = getAdapterPosition();
-                        int idpemesanan = pemesanan_model.getIdpemesanan();
-                        db.updateStatusPemesanan(idpemesanan, "cancel");
-                        pemesanan_model.setStatuspemesanan("cancel");
-
-
-                        //hapus yang di list ( bukan yang di db)
-                        listpemesanan.remove(position);
-                        notifyItemRemoved(position);
-                        notifyItemRangeChanged(position, listpemesanan.size());
-                        Toast toast = Toast.makeText(context, "Transaksi Dibatalkan", Toast.LENGTH_SHORT);
-                        toast.show();
-//                        ProsesFragment.cancelpesanan();
-                    }
-                });
-
-
                 // Add button click listener for cancel action
-            } else if ("fragmentbatal".equals(fragmentType)) {
+                btnaction.setOnClickListener(view -> {
+                    int position = getAdapterPosition();
+                    Pemesanan_Model pemesananModel = listpemesanan.get(position);
+                    int idPemesanan = pemesananModel.getIdPemesanan();
 
+                    // Menampilkan ProgressDialog
+                    ProgressDialog progressDialog = new ProgressDialog(context);
+                    progressDialog.setMessage("Proses Pembatalan...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
 
-                Cvstatus.setRadius(15);
-                Cvstatus.setCardBackgroundColor(context.getResources().getColor(R.color.CVbatal));
-                statuspemesanan.setText("Transaksi Batal");
+                    // Membuat objek Pemesanan_Model dengan status baru
+                    Pemesanan_Model cancelModel = new Pemesanan_Model(idPemesanan, pemesananModel.getIdRuangan(), "cancel");
 
-                btnaction.setText("Reorder");
-                //transfer gambar ke holder
-                int imageResource = context.getResources().getIdentifier(pemesanan_model.getGambarruangan(), "drawable", context.getPackageName());
-                gambarpesanan.setImageResource(imageResource);
-                btnaction.setBackground(context.getResources().getDrawable(R.drawable.btn_gradient_style)); // Change to your desired color
-                // Add button click listener for reorder action
+                    // Mengirim permintaan pembatalan ke server
+                    apiService.cancelPemesanan(cancelModel).enqueue(new Callback<Pemesanan_Response>() {
+                        @Override
+                        public void onResponse(Call<Pemesanan_Response> call, Response<Pemesanan_Response> response) {
+                            progressDialog.dismiss();
+
+                            if (response.isSuccessful() && response.body() != null) {
+                                if ("success".equals(response.body().getStatus())) {
+                                    // Mengupdate UI dan model
+                                    listpemesanan.remove(position);
+                                    notifyItemRemoved(position);
+                                    notifyItemRangeChanged(position, listpemesanan.size());
+
+                                    // Menampilkan toast di thread utama
+                                    ((Activity) context).runOnUiThread(() ->
+                                            Toast.makeText(context, "Transaksi Dibatalkan", Toast.LENGTH_SHORT).show()
+                                    );
+                                } else {
+                                    ((Activity) context).runOnUiThread(() ->
+                                            Toast.makeText(context, "Gagal membatalkan pemesanan: " + response.body().getMessage(), Toast.LENGTH_SHORT).show()
+                                    );
+                                }
+                            } else {
+                                ((Activity) context).runOnUiThread(() ->
+                                        Toast.makeText(context, "Respons tidak berhasil", Toast.LENGTH_SHORT).show()
+                                );
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Pemesanan_Response> call, Throwable t) {
+                            ((Activity) context).runOnUiThread(() -> {
+                                progressDialog.dismiss();
+                                Toast.makeText(context, "Gagal menghubungi server: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
+                        }
+                    });
+                });
             }
         }
+    }
+
+    public void updateData(List<Pemesanan_Model> newData) {
+        this.listpemesanan = newData;
+        notifyDataSetChanged();
     }
 
 }

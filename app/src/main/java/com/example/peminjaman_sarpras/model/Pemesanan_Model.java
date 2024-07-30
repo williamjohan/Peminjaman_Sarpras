@@ -1,33 +1,29 @@
 package com.example.peminjaman_sarpras.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Pemesanan_Model {
+    @SerializedName("id_pemesanan")
+    private int idPemesanan;
 
-    int idpemesanan ; //primary key
-    int idRuangan; //foreign key
-    int hargaruangan ; //dapat dari join table
-    String namaruangan; //dapat dari join table
-    String gambarruangan;
-    String statuspemesanan ;
+    @SerializedName("id_ruangan")
+    private int idRuangan;
 
-//    String jampesanan; //ini harus nya input
-//    String tanggalpesanan; //ini harusnya input
+    @SerializedName("status_pemesanan")
+    private String statusPemesanan;
 
-
-    public Pemesanan_Model(int idpemesanan, int idRuangan, int hargaruangan,String statuspemesanan, String namaruangan, String gambarruangan) {
-        this.idpemesanan = idpemesanan;
-        this.statuspemesanan = statuspemesanan;
+    public Pemesanan_Model(int idPemesanan, int idRuangan, String statusPemesanan) {
+        this.idPemesanan = idPemesanan;
         this.idRuangan = idRuangan;
-        this.hargaruangan = hargaruangan;
-        this.namaruangan = namaruangan;
-        this.gambarruangan = gambarruangan;
+        this.statusPemesanan = statusPemesanan;
     }
 
-    public int getIdpemesanan() {
-        return idpemesanan;
+    public int getIdPemesanan() {
+        return idPemesanan;
     }
 
-    public void setIdpemesanan(int idpemesanan) {
-        this.idpemesanan = idpemesanan;
+    public void setIdPemesanan(int idPemesanan) {
+        this.idPemesanan = idPemesanan;
     }
 
     public int getIdRuangan() {
@@ -38,35 +34,11 @@ public class Pemesanan_Model {
         this.idRuangan = idRuangan;
     }
 
-    public int getHargaruangan() {
-        return hargaruangan;
+    public String getStatusPemesanan() {
+        return statusPemesanan;
     }
 
-    public void setHargaruangan(int hargaruangan) {
-        this.hargaruangan = hargaruangan;
-    }
-
-    public String getNamaruangan() {
-        return namaruangan;
-    }
-
-    public void setNamaruangan(String namaruangan) {
-        this.namaruangan = namaruangan;
-    }
-
-    public String getGambarruangan() {
-        return gambarruangan;
-    }
-
-    public void setGambarruangan(String gambarruangan) {
-        this.gambarruangan = gambarruangan;
-    }
-
-    public String getStatuspemesanan() {
-        return statuspemesanan;
-    }
-
-    public void setStatuspemesanan(String statuspemesanan) {
-        this.statuspemesanan = statuspemesanan;
+    public void setStatusPemesanan(String statusPemesanan) {
+        this.statusPemesanan = statusPemesanan;
     }
 }
